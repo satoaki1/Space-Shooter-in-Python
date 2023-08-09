@@ -1,6 +1,5 @@
 import pygame
 import os
-import time
 import random
 
 pygame.font.init()
@@ -39,7 +38,7 @@ class Laser:
         self.y += vel
 
     def off_screen(self, height):
-        return not (self.y <= height and self.y >= 0)
+        return not (height >= self.y >= 0)
 
     def collision(self, obj):
         return collide(self, obj)
@@ -114,14 +113,15 @@ class Player(Ship):
 
     def draw(self, window):
         super().draw(window)
-        self.healthbar(window)
+        self.health_bar(window)
 
-    def healthbar(self, window):
+    def health_bar(self, window):
         pygame.draw.rect(window, (255, 0, 0),
                          (self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width(), 10))
         pygame.draw.rect(window, (0, 255, 0), (
-        self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width() * (self.health / self.max_health),
-        10))
+            self.x, self.y + self.ship_img.get_height() + 10,
+            self.ship_img.get_width() * (self.health / self.max_health),
+            10))
 
 
 class Enemy(Ship):
@@ -149,7 +149,7 @@ class Enemy(Ship):
 def collide(obj1, obj2):
     offset_x = obj2.x - obj1.x
     offset_y = obj2.y - obj1.y
-    return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
+    return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) is not None
 
 
 def main():
