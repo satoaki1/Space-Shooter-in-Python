@@ -1,7 +1,7 @@
 from constants import *
 from utilities import collide
 
-
+# Laser Object
 class Laser:
     def __init__(self, x, y, img):
         self.x = x
@@ -21,7 +21,7 @@ class Laser:
     def collision(self, obj):
         return collide(self, obj)
 
-
+# Ship object
 class Ship:
     COOLDOWN = 30
 
@@ -67,7 +67,7 @@ class Ship:
     def get_height(self):
         return self.ship_img.get_height()
 
-
+# Player object (Super class: Ship)
 class Player(Ship):
     def __init__(self, x, y, health=100):
         super().__init__(x, y, health)
@@ -100,7 +100,7 @@ class Player(Ship):
         self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width() * (self.health / self.max_health),
         10))
 
-
+# Enemy object (Super class: Ship)
 class Enemy(Ship):
     COLOR_MAP = {
         "red": (RED_SPACE_SHIP, RED_LASER),
