@@ -1,8 +1,8 @@
-import pygame
 import random
+
+from constants import *
 from ships import Player, Enemy
 from utilities import collide
-from constants import *
 
 
 def main():

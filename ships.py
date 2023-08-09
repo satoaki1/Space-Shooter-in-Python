@@ -1,6 +1,6 @@
-import pygame
 from constants import *
 from utilities import collide
+
 
 class Laser:
     def __init__(self, x, y, img):
@@ -16,7 +16,7 @@ class Laser:
         self.y += vel
 
     def off_screen(self, height):
-        return not(self.y <= height and self.y >= 0)
+        return not (self.y <= height and self.y >= 0)
 
     def collision(self, obj):
         return collide(self, obj)
@@ -94,16 +94,19 @@ class Player(Ship):
         self.healthbar(window)
 
     def healthbar(self, window):
-        pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width(), 10))
-        pygame.draw.rect(window, (0,255,0), (self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width() * (self.health/self.max_health), 10))
+        pygame.draw.rect(window, (255, 0, 0),
+                         (self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width(), 10))
+        pygame.draw.rect(window, (0, 255, 0), (
+        self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width() * (self.health / self.max_health),
+        10))
 
 
 class Enemy(Ship):
     COLOR_MAP = {
-                "red": (RED_SPACE_SHIP, RED_LASER),
-                "green": (GREEN_SPACE_SHIP, GREEN_LASER),
-                "blue": (BLUE_SPACE_SHIP, BLUE_LASER)
-                }
+        "red": (RED_SPACE_SHIP, RED_LASER),
+        "green": (GREEN_SPACE_SHIP, GREEN_LASER),
+        "blue": (BLUE_SPACE_SHIP, BLUE_LASER)
+    }
 
     def __init__(self, x, y, color, health=100):
         super().__init__(x, y, health)
@@ -115,6 +118,6 @@ class Enemy(Ship):
 
     def shoot(self):
         if self.cool_down_counter == 0:
-            laser = Laser(self.x-20, self.y, self.laser_img)
+            laser = Laser(self.x - 20, self.y, self.laser_img)
             self.lasers.append(laser)
             self.cool_down_counter = 1
