@@ -1,1 +1,1 @@
-# space-shooter-in-python
+# Space Shooter Game
